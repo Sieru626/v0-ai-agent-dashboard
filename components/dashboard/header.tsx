@@ -27,7 +27,7 @@ export function DashboardHeader() {
           </h1>
         </div>
         <span className="text-[8px] text-neon-cyan opacity-60">
-          {'// AI AGENT HQ'}
+          {'// AI姉妹司令室'}
         </span>
       </div>
 

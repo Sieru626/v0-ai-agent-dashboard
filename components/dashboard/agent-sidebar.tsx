@@ -136,7 +136,7 @@ export function AgentSidebar() {
           {'THE 5 SISTERS'}
         </h2>
         <p className="text-[6px] text-center text-[#555] mt-1">
-          {'// AGENT ROSTER'}
+          {'// エージェント一覧'}
         </p>
       </div>
       <div className="flex-1 overflow-y-auto">
@@ -148,7 +148,7 @@ export function AgentSidebar() {
       </div>
       <div className="p-2 border-t border-[#1a1a1a]">
         <div className="flex items-center justify-between text-[7px] text-[#555]">
-          <span>{'ACTIVE: 3/5'}</span>
+          <span>{'稼働中: 3/5'}</span>
           <span className="text-neon-green">{'SYNC OK'}</span>
         </div>
       </div>

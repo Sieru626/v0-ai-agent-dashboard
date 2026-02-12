@@ -70,10 +70,10 @@ const typeIcons = {
 }
 
 const rarityColors = {
-  common: { border: "border-[#555]", text: "text-[#888]", label: "C" },
-  rare: { border: "border-neon-cyan", text: "text-neon-cyan", label: "R" },
-  epic: { border: "border-neon-pink", text: "text-neon-pink", label: "E" },
-  legendary: { border: "border-neon-green", text: "text-neon-green", label: "L" },
+  common: { border: "border-[#555]", text: "text-[#888]", label: "並" },
+  rare: { border: "border-neon-cyan", text: "text-neon-cyan", label: "稀" },
+  epic: { border: "border-neon-pink", text: "text-neon-pink", label: "極" },
+  legendary: { border: "border-neon-green", text: "text-neon-green", label: "伝" },
 }
 
 function InventoryCard({ item }: { item: InventoryItem }) {
@@ -99,7 +99,7 @@ function InventoryCard({ item }: { item: InventoryItem }) {
           </div>
           <div className="flex items-center justify-between mt-0.5">
             <span className="text-[6px] text-[#555]">
-              {'by '}{item.agent}
+              {'担当: '}{item.agent}
             </span>
             <span className="text-[6px] text-[#444]">{item.timestamp}</span>
           </div>
@@ -116,11 +116,11 @@ export function InventorySidebar() {
         <div className="flex items-center gap-2 justify-center">
           <Package className="w-3 h-3 text-neon-green" />
           <h2 className="text-[9px] neon-text-green tracking-widest">
-            {'INVENTORY'}
+            {'倉庫'}
           </h2>
         </div>
         <p className="text-[6px] text-center text-[#555] mt-1">
-          {'// ARTIFACTS & OUTPUTS'}
+          {'// 成果物・アーティファクト'}
         </p>
       </div>
 
@@ -135,11 +135,11 @@ export function InventorySidebar() {
       <div className="p-2 border-t border-[#1a1a1a]">
         <div className="flex items-center justify-between text-[7px]">
           <span className="text-[#555]">
-            {'ITEMS: '}{inventoryItems.length}
+            {'所持品: '}{inventoryItems.length}
           </span>
           <div className="flex items-center gap-1 text-neon-green">
             <Star className="w-2.5 h-2.5" />
-            <span>{'SCORE: 1,240'}</span>
+            <span>{'スコア: 1,240'}</span>
           </div>
         </div>
         <div className="flex gap-1 mt-1.5">

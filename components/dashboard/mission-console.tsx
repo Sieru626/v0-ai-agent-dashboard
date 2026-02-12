@@ -20,7 +20,7 @@ const initialMessages: ChatMessage[] = [
     agent: "SYSTEM",
     character: "",
     status: "active",
-    text: ">> Mission Console v2.4 initialized. All agents online.",
+    text: ">> 指令コンソール v2.4 起動完了。全エージェント接続済み。",
     timestamp: "09:00:00",
     type: "system",
   },
@@ -56,7 +56,7 @@ const initialMessages: ChatMessage[] = [
     agent: "SYSTEM",
     character: "",
     status: "active",
-    text: ">> Build #1042 successful. Deploying to staging...",
+    text: ">> Build #1042 成功。ステージング環境にデプロイ中...",
     timestamp: "09:05:00",
     type: "system",
   },
@@ -141,7 +141,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
       <div className="flex justify-end px-3 py-1.5">
         <div className="max-w-[70%] bg-[#1a0a20] border border-neon-pink p-2">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-[7px] text-neon-pink">{'YOU'}</span>
+            <span className="text-[7px] text-neon-pink">{'あなた'}</span>
             <span className="text-[6px] text-[#555]">{message.timestamp}</span>
           </div>
           <p className="text-[8px] text-[#ccc] leading-relaxed">{message.text}</p>
@@ -210,7 +210,7 @@ export function MissionConsole() {
         agent: "SYSTEM",
         character: "",
         status: "active",
-        text: `>> Routing to ${respondingAgent}...`,
+        text: `>> ${respondingAgent} に転送中...`,
         timestamp: new Date().toLocaleTimeString("ja-JP", { hour12: false }),
         type: "system",
       }
@@ -235,13 +235,13 @@ export function MissionConsole() {
     <div className="flex-1 flex flex-col bg-[#0a0a0a]">
       <div className="flex items-center gap-2 px-4 py-2 border-b border-[#1a1a1a]">
         <Terminal className="w-3 h-3 text-neon-cyan" />
-        <h2 className="text-[9px] neon-text-cyan">{'MISSION CONSOLE'}</h2>
+        <h2 className="text-[9px] neon-text-cyan">{'指令コンソール'}</h2>
         <span className="text-[6px] text-[#555] ml-2">
-          {'// CHAT INTERFACE v2.4'}
+          {'// チャット v2.4'}
         </span>
         <div className="flex-1" />
         <span className="text-[7px] text-[#444]">
-          {'MSG: '}{messages.length}
+          {'件数: '}{messages.length}
         </span>
       </div>
 
@@ -261,21 +261,21 @@ export function MissionConsole() {
             onKeyDown={(e) => {
               if (e.key === "Enter") handleSend()
             }}
-            placeholder="Enter command..."
+            placeholder="コマンドを入力..."
             className="flex-1 bg-[#0d0d0d] border border-[#222] px-3 py-2 text-[9px] text-neon-cyan placeholder:text-[#333] focus:outline-none focus:border-neon-pink transition-colors"
           />
           <button
             onClick={handleSend}
             className="p-2 border border-neon-pink text-neon-pink hover:bg-neon-pink hover:text-[#0a0a0a] transition-colors"
-            aria-label="Send message"
+            aria-label="メッセージを送信"
           >
             <Send className="w-3 h-3" />
           </button>
         </div>
         <div className="flex items-center gap-3 mt-2 text-[6px] text-[#444]">
-          <span>{'[TAB] Auto-complete'}</span>
-          <span>{'[ENTER] Send'}</span>
-          <span>{'[@] Mention agent'}</span>
+          <span>{'[TAB] 補完'}</span>
+          <span>{'[ENTER] 送信'}</span>
+          <span>{'[@] エージェント指定'}</span>
         </div>
       </div>
     </div>

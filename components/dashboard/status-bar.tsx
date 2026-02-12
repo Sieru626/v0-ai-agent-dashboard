@@ -8,7 +8,7 @@ export function StatusBar() {
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-1 text-neon-cyan">
           <Activity className="w-2.5 h-2.5" />
-          <span>{'UPTIME: 99.97%'}</span>
+          <span>{'稼働率: 99.97%'}</span>
         </div>
         <div className="flex items-center gap-1 text-[#555]">
           <HardDrive className="w-2.5 h-2.5" />
@@ -16,16 +16,16 @@ export function StatusBar() {
         </div>
         <div className="flex items-center gap-1 text-[#555]">
           <Clock className="w-2.5 h-2.5" />
-          <span>{'LATENCY: 12ms'}</span>
+          <span>{'遅延: 12ms'}</span>
         </div>
       </div>
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-1 text-neon-green">
           <Flame className="w-2.5 h-2.5" />
-          <span>{'STREAK: 7 DAYS'}</span>
+          <span>{'連続稼働: 7日'}</span>
         </div>
         <span className="text-[#444]">
-          {'なりたたせ屋本舗 v2.4.0 // Powered by AI Sisters'}
+          {'なりたたせ屋本舗 v2.4.0 // AI姉妹が動かしています'}
         </span>
       </div>
     </footer>

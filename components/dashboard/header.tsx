@@ -4,15 +4,18 @@ import { useEffect, useState } from "react"
 import { Shield, Wifi, Cpu, Zap } from "lucide-react"
 
 export function DashboardHeader() {
+  const [timeStr, setTimeStr] = useState("")
   const [tick, setTick] = useState(0)
 
   useEffect(() => {
-    const interval = setInterval(() => setTick((t) => t + 1), 1000)
+    const update = () => {
+      setTimeStr(new Date().toLocaleTimeString("ja-JP", { hour12: false }))
+      setTick((t) => t + 1)
+    }
+    update()
+    const interval = setInterval(update, 1000)
     return () => clearInterval(interval)
   }, [])
-
-  const time = new Date()
-  const timeStr = time.toLocaleTimeString("ja-JP", { hour12: false })
 
   return (
     <header className="flex items-center justify-between px-4 py-2 border-b-2 neon-border-pink bg-[#0a0a0a]">

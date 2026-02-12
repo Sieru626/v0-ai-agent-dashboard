@@ -1,12 +1,35 @@
 "use client"
 
+import { useState, useCallback } from "react"
 import { DashboardHeader } from "@/components/dashboard/header"
-import { AgentSidebar } from "@/components/dashboard/agent-sidebar"
+import { AgentBar } from "@/components/dashboard/agent-bar"
 import { MissionConsole } from "@/components/dashboard/mission-console"
-import { InventorySidebar } from "@/components/dashboard/inventory-sidebar"
+import { InventoryBar } from "@/components/dashboard/inventory-bar"
 import { StatusBar } from "@/components/dashboard/status-bar"
+import { ModeSwitcher, type ViewMode } from "@/components/dashboard/mode-switcher"
+import { ArtifactViewerWindows } from "@/components/dashboard/artifact-viewer-windows"
+import { ArtifactViewerHologram } from "@/components/dashboard/artifact-viewer-hologram"
+import { ArtifactViewerSlide } from "@/components/dashboard/artifact-viewer-slide"
+import { inventoryItems } from "@/components/dashboard/artifact-data"
 
 export default function DashboardPage() {
+  const [viewMode, setViewMode] = useState<ViewMode>("windows")
+  const [openArtifactIds, setOpenArtifactIds] = useState<number[]>([])
+
+  const handleToggleArtifact = useCallback((id: number) => {
+    setOpenArtifactIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    )
+  }, [])
+
+  const handleCloseArtifact = useCallback((id: number) => {
+    setOpenArtifactIds((prev) => prev.filter((x) => x !== id))
+  }, [])
+
+  const handleCloseAllArtifacts = useCallback(() => {
+    setOpenArtifactIds([])
+  }, [])
+
   return (
     <div className="flex flex-col h-screen bg-[#0a0a0a] overflow-hidden">
       {/* Scanline overlay */}
@@ -19,13 +42,46 @@ export default function DashboardPage() {
       />
 
       <DashboardHeader />
+      <AgentBar />
 
-      <div className="flex flex-1 min-h-0">
-        <AgentSidebar />
-        <MissionConsole />
-        <InventorySidebar />
+      {/* Mode switcher bar */}
+      <div className="flex items-center justify-between px-4 py-1 border-b border-[#1a1a1a] bg-[#080808]">
+        <ModeSwitcher current={viewMode} onChange={setViewMode} />
+        <span className="text-[6px] text-[#444]">
+          {'// GenSparkの魔法で資料を召喚'}
+        </span>
       </div>
 
+      {/* Full-screen chat area with artifact overlay */}
+      <div className="flex-1 min-h-0 relative">
+        <MissionConsole />
+
+        {/* Artifact viewers */}
+        {viewMode === "windows" && (
+          <ArtifactViewerWindows
+            items={inventoryItems}
+            openIds={openArtifactIds}
+            onClose={handleCloseArtifact}
+          />
+        )}
+        {viewMode === "hologram" && (
+          <ArtifactViewerHologram
+            items={inventoryItems}
+            openIds={openArtifactIds}
+            onClose={handleCloseArtifact}
+          />
+        )}
+        {viewMode === "slide" && (
+          <ArtifactViewerSlide
+            items={inventoryItems}
+            openIds={openArtifactIds}
+            onClose={handleCloseArtifact}
+            onClosePanel={handleCloseAllArtifacts}
+          />
+        )}
+      </div>
+
+      <InventoryBar openIds={openArtifactIds} onToggle={handleToggleArtifact} />
       <StatusBar />
     </div>
   )

@@ -7,7 +7,7 @@ import { PixelAvatar } from "@/components/dashboard/pixel-avatar"
 
 type GatePhase = "idle" | "verifying" | "granted" | "transitioning"
 
-const PASSCODE = "naritat"
+const PASSCODE = "Sieru626"
 
 export function GateScreen() {
   const [phase, setPhase] = useState<GatePhase>("idle")
@@ -172,7 +172,7 @@ export function GateScreen() {
 
         {/* Hint */}
         <p className="text-[6px] text-[#333] mt-8 animate-fade-up" style={{ animationDelay: "0.8s" }}>
-          {"// hint: naritat"}
+          {"// THE 5 SISTERS SYSTEM"}
         </p>
       </div>
     </div>

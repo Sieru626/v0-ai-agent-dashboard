@@ -91,7 +91,7 @@ export function LobbyScreen() {
         <div className="flex items-center gap-3">
           <Zap className="w-5 h-5 text-neon-pink animate-pulse-glow" />
           <div className="flex flex-col items-center gap-0.5">
-            <h1 className="text-base neon-text-pink tracking-[0.15em] animate-flicker" style={{ textShadow: "0 0 10px #ff2d78, 0 0 30px #ff2d78, 0 0 60px #ff2d78" }}>{"\u6210\u7ACB\u305F\u305B\u672C\u8217"}</h1>
+            <h1 className="text-base neon-text-pink tracking-[0.15em] animate-flicker" style={{ textShadow: "0 0 10px #ff2d78, 0 0 30px #ff2d78, 0 0 60px #ff2d78" }}>{"\u6210\u7ACB\u305F\u305B\u5C4B\u672C\u8217"}</h1>
             <span className="text-[6px] text-neon-cyan tracking-[0.4em] opacity-60">{"NARITATASE-YA"}</span>
           </div>
           <Zap className="w-5 h-5 text-neon-pink animate-pulse-glow" />

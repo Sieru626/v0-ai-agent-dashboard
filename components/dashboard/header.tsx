@@ -23,7 +23,7 @@ export function DashboardHeader() {
         <div className="flex items-center gap-2">
           <Zap className="w-4 h-4 text-neon-pink animate-pulse-glow" />
           <h1 className="text-xs neon-text-pink tracking-[0.12em]" style={{ textShadow: "0 0 8px #ff2d78, 0 0 25px #ff2d78, 0 0 50px #ff2d78" }}>
-            {"\u6210\u7ACB\u305F\u305B\u672C\u8217"}
+            {"\u6210\u7ACB\u305F\u305B\u5C4B\u672C\u8217"}
           </h1>
           <span className="text-[6px] text-neon-cyan opacity-50 tracking-widest">{"NARITATASE-YA"}</span>
         </div>

@@ -4,11 +4,20 @@ import { Monitor, Sparkles, PanelRight } from "lucide-react"
 
 export type ViewMode = "windows" | "hologram" | "slide"
 
-const modes: { key: ViewMode; label: string; sublabel: string; icon: typeof Monitor }[] = [
-  { key: "windows", label: "A", sublabel: "ウィンドウ", icon: Monitor },
-  { key: "hologram", label: "B", sublabel: "ホログラム", icon: Sparkles },
-  { key: "slide", label: "C", sublabel: "スライド", icon: PanelRight },
-]
+interface ModeOption {
+  key: ViewMode
+  label: string
+  sublabel: string
+  icon: typeof Monitor
+}
+
+function getModes(): ModeOption[] {
+  return [
+    { key: "windows", label: "A", sublabel: "\u30A6\u30A3\u30F3\u30C9\u30A6", icon: Monitor },
+    { key: "hologram", label: "B", sublabel: "\u30DB\u30ED\u30B0\u30E9\u30E0", icon: Sparkles },
+    { key: "slide", label: "C", sublabel: "\u30B9\u30E9\u30A4\u30C9", icon: PanelRight },
+  ]
+}
 
 export function ModeSwitcher({
   current,
@@ -17,9 +26,11 @@ export function ModeSwitcher({
   current: ViewMode
   onChange: (mode: ViewMode) => void
 }) {
+  const modes = getModes()
+
   return (
     <div className="flex items-center gap-1">
-      <span className="text-[7px] text-[#555] mr-1">{'表示:'}</span>
+      <span className="text-[7px] text-[#555] mr-1">{"\u8868\u793A:"}</span>
       {modes.map((mode) => {
         const Icon = mode.icon
         const isActive = current === mode.key
@@ -35,7 +46,7 @@ export function ModeSwitcher({
           >
             <Icon className="w-2.5 h-2.5" />
             <span>{mode.label}</span>
-            <span className={`${isActive ? "text-neon-pink" : "text-[#555]"}`}>{mode.sublabel}</span>
+            <span className={isActive ? "text-neon-pink" : "text-[#555]"}>{mode.sublabel}</span>
           </button>
         )
       })}

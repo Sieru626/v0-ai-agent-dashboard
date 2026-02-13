@@ -23,11 +23,11 @@ export function DashboardHeader() {
         <div className="flex items-center gap-2">
           <Zap className="w-4 h-4 text-neon-pink animate-pulse-glow" />
           <h1 className="text-sm neon-text-pink tracking-wider">
-            {'なりたたせ屋本舗'}
+            {"\u306A\u308A\u305F\u305F\u305B\u5C4B\u672C\u8217"}
           </h1>
         </div>
         <span className="text-[8px] text-neon-cyan opacity-60">
-          {'// AI姉妹司令室'}
+          {"// AI\u59C9\u59B9\u53F8\u4EE4\u5BA4"}
         </span>
       </div>
 
@@ -35,15 +35,15 @@ export function DashboardHeader() {
         <div className="flex items-center gap-4 text-[8px]">
           <div className="flex items-center gap-1 text-neon-green">
             <Shield className="w-3 h-3" />
-            <span>{'SEC: OK'}</span>
+            <span>{"SEC: OK"}</span>
           </div>
           <div className="flex items-center gap-1 text-neon-cyan">
             <Wifi className="w-3 h-3" />
-            <span>{'NET: 100%'}</span>
+            <span>{"NET: 100%"}</span>
           </div>
           <div className="flex items-center gap-1 text-neon-pink">
             <Cpu className="w-3 h-3" />
-            <span>{'CPU: 42%'}</span>
+            <span>{"CPU: 42%"}</span>
           </div>
         </div>
 
@@ -54,7 +54,7 @@ export function DashboardHeader() {
             }`}
           />
           <span className="text-[10px] neon-text-green animate-blink">
-            {'ONLINE'}
+            {"ONLINE"}
           </span>
         </div>
 

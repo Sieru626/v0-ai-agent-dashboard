@@ -1,5 +1,3 @@
-"use client"
-
 import { Activity, HardDrive, Clock, Flame } from "lucide-react"
 
 export function StatusBar() {
@@ -8,24 +6,24 @@ export function StatusBar() {
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-1 text-neon-cyan">
           <Activity className="w-2.5 h-2.5" />
-          <span>{'稼働率: 99.97%'}</span>
+          <span>{"\u7A3C\u50CD\u7387: 99.97%"}</span>
         </div>
         <div className="flex items-center gap-1 text-[#555]">
           <HardDrive className="w-2.5 h-2.5" />
-          <span>{'MEM: 4.2GB / 8GB'}</span>
+          <span>{"MEM: 4.2GB / 8GB"}</span>
         </div>
         <div className="flex items-center gap-1 text-[#555]">
           <Clock className="w-2.5 h-2.5" />
-          <span>{'遅延: 12ms'}</span>
+          <span>{"\u9045\u5EF6: 12ms"}</span>
         </div>
       </div>
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-1 text-neon-green">
           <Flame className="w-2.5 h-2.5" />
-          <span>{'連続稼働: 7日'}</span>
+          <span>{"\u9023\u7D9A\u7A3C\u50CD: 7\u65E5"}</span>
         </div>
         <span className="text-[#444]">
-          {'なりたたせ屋本舗 v2.4.0 // AI姉妹が動かしています'}
+          {"\u306A\u308A\u305F\u305F\u305B\u5C4B\u672C\u8217 v2.4.0 // AI\u59C9\u59B9\u304C\u52D5\u304B\u3057\u3066\u3044\u307E\u3059"}
         </span>
       </div>
     </footer>

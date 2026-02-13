@@ -11,7 +11,7 @@ const pixelFont = Press_Start_2P({
 
 export const metadata: Metadata = {
   title: 'なりたたせ屋本舗 | AI Agent Dashboard',
-  description: 'Cyberpunk AI Agent Integration Dashboard - THE 5 SISTERS',
+  description: 'Cyberpunk AI Agent Integration Dashboard - THE 5 SISTERS - NARITATASE-YA',
 }
 
 export const viewport: Viewport = {

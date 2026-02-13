@@ -32,22 +32,18 @@ export default function ConferenceRoom() {
 
   return (
     <div className="flex flex-col h-screen bg-[#0a0a0a] overflow-hidden">
-      {/* Scanline */}
       <div
         className="pointer-events-none fixed inset-0 z-50 opacity-[0.03]"
-        style={{
-          background:
-            "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,240,255,0.15) 2px, rgba(0,240,255,0.15) 4px)",
-        }}
+        style={{ background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,240,255,0.15) 2px, rgba(0,240,255,0.15) 4px)" }}
       />
 
-      <RoomHeader roomName="会議室" roomNameEn="CONFERENCE ROOM" borderClass="neon-border-pink" textClass="text-neon-pink" />
+      <RoomHeader roomName={"\u4F1A\u8B70\u5BA4"} roomNameEn="CONFERENCE ROOM" borderClass="neon-border-pink" textClass="text-neon-pink" />
       <AgentBar />
 
       <div className="flex items-center justify-between px-4 py-1 border-b border-[#1a1a1a] bg-[#080808]">
         <ModeSwitcher current={viewMode} onChange={setViewMode} />
         <span className="text-[6px] text-[#444]">
-          {"// GenSparkの魔法で資料を召喚"}
+          {"// GenSpark\u306E\u9B54\u6CD5\u3067\u8CC7\u6599\u3092\u53EC\u559A"}
         </span>
       </div>
 

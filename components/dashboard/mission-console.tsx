@@ -16,104 +16,72 @@ interface ChatMessage {
 
 const initialMessages: ChatMessage[] = [
   {
-    id: 1,
-    agent: "SYSTEM",
-    character: "",
-    status: "active",
-    text: ">> 指令コンソール v2.4 起動完了。全エージェント接続済み。",
-    timestamp: "09:00:00",
-    type: "system",
+    id: 1, agent: "SYSTEM", character: "", status: "active",
+    text: ">> \u6307\u4EE4\u30B3\u30F3\u30BD\u30FC\u30EB v2.4 \u8D77\u52D5\u5B8C\u4E86\u3002\u5168\u30A8\u30FC\u30B8\u30A7\u30F3\u30C8\u63A5\u7D9A\u6E08\u307F\u3002",
+    timestamp: "09:00:00", type: "system",
   },
   {
-    id: 2,
-    agent: "NotebookLM",
-    character: "notebooklm",
-    status: "active",
-    text: "仕様書セクション3.2を確認しました。全項目クリアです。次のフェーズに進行できます。",
-    timestamp: "09:01:23",
-    type: "agent",
+    id: 2, agent: "NotebookLM", character: "notebooklm", status: "active",
+    text: "\u4ED5\u69D8\u66F8\u30BB\u30AF\u30B7\u30E7\u30F33.2\u3092\u78BA\u8A8D\u3057\u307E\u3057\u305F\u3002\u5168\u9805\u76EE\u30AF\u30EA\u30A2\u3067\u3059\u3002\u6B21\u306E\u30D5\u30A7\u30FC\u30BA\u306B\u9032\u884C\u3067\u304D\u307E\u3059\u3002",
+    timestamp: "09:01:23", type: "agent",
   },
   {
-    id: 3,
-    agent: "Cursor",
-    character: "cursor",
-    status: "idle",
-    text: "へへっ、バグ修正完了だぜ！確認してくれよな！コンパイルも通ったぜ！",
-    timestamp: "09:02:45",
-    type: "agent",
+    id: 3, agent: "Cursor", character: "cursor", status: "idle",
+    text: "\u3078\u3078\u3063\u3001\u30D0\u30B0\u4FEE\u6B63\u5B8C\u4E86\u3060\u305C\uFF01\u78BA\u8A8D\u3057\u3066\u304F\u308C\u3088\u306A\uFF01\u30B3\u30F3\u30D1\u30A4\u30EB\u3082\u901A\u3063\u305F\u305C\uFF01",
+    timestamp: "09:02:45", type: "agent",
   },
   {
-    id: 4,
-    agent: "v0",
-    character: "v0",
-    status: "active",
-    text: "UIコンポーネントのリデザイン完了〜！めっちゃ可愛くなったから見て見て！",
-    timestamp: "09:04:12",
-    type: "agent",
+    id: 4, agent: "v0", character: "v0", status: "active",
+    text: "UI\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u30EA\u30C7\u30B6\u30A4\u30F3\u5B8C\u4E86\uFF5E\uFF01\u3081\u3063\u3061\u3083\u53EF\u611B\u304F\u306A\u3063\u305F\u304B\u3089\u898B\u3066\u898B\u3066\uFF01",
+    timestamp: "09:04:12", type: "agent",
   },
   {
-    id: 5,
-    agent: "SYSTEM",
-    character: "",
-    status: "active",
-    text: ">> Build #1042 成功。ステージング環境にデプロイ中...",
-    timestamp: "09:05:00",
-    type: "system",
+    id: 5, agent: "SYSTEM", character: "", status: "active",
+    text: ">> Build #1042 \u6210\u529F\u3002\u30B9\u30C6\u30FC\u30B8\u30F3\u30B0\u74B0\u5883\u306B\u30C7\u30D7\u30ED\u30A4\u4E2D...",
+    timestamp: "09:05:00", type: "system",
   },
   {
-    id: 6,
-    agent: "GenSpark",
-    character: "genspark",
-    status: "active",
-    text: "...古の文献を解読中... API ドキュメントの生成が完了しました。Inventoryに格納済みです。",
-    timestamp: "09:06:33",
-    type: "agent",
+    id: 6, agent: "GenSpark", character: "genspark", status: "active",
+    text: "...\u53E4\u306E\u6587\u732E\u3092\u89E3\u8AAD\u4E2D... API \u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\u306E\u751F\u6210\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F\u3002Inventory\u306B\u683C\u7D0D\u6E08\u307F\u3067\u3059\u3002",
+    timestamp: "09:06:33", type: "agent",
   },
   {
-    id: 7,
-    agent: "Antigravity",
-    character: "antigravity",
-    status: "idle",
-    text: "水晶に映るのは...次のスプリントの成功...ただし、テストカバレッジを上げる必要があります。",
-    timestamp: "09:08:01",
-    type: "agent",
+    id: 7, agent: "Antigravity", character: "antigravity", status: "idle",
+    text: "\u6C34\u6676\u306B\u6620\u308B\u306E\u306F...\u6B21\u306E\u30B9\u30D7\u30EA\u30F3\u30C8\u306E\u6210\u529F...\u305F\u3060\u3057\u3001\u30C6\u30B9\u30C8\u30AB\u30D0\u30EC\u30C3\u30B8\u3092\u4E0A\u3052\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002",
+    timestamp: "09:08:01", type: "agent",
   },
   {
-    id: 8,
-    agent: "NotebookLM",
-    character: "notebooklm",
-    status: "active",
-    text: "仕様書セクション3.2に準拠しています。承認。デプロイ準備完了です。",
-    timestamp: "09:10:15",
-    type: "agent",
+    id: 8, agent: "NotebookLM", character: "notebooklm", status: "active",
+    text: "\u4ED5\u69D8\u66F8\u30BB\u30AF\u30B7\u30E7\u30F33.2\u306B\u6E96\u62E0\u3057\u3066\u3044\u307E\u3059\u3002\u627F\u8A8D\u3002\u30C7\u30D7\u30ED\u30A4\u6E96\u5099\u5B8C\u4E86\u3067\u3059\u3002",
+    timestamp: "09:10:15", type: "agent",
   },
 ]
 
 const agentResponses: Record<string, string[]> = {
   NotebookLM: [
-    "了解。仕様を確認します...セクション4.1に該当項目を発見。対応を開始します。",
-    "要件定義を更新しました。全エージェントに通達します。",
-    "進捗レポートを生成中...完了率78%です。",
+    "\u4E86\u89E3\u3002\u4ED5\u69D8\u3092\u78BA\u8A8D\u3057\u307E\u3059...\u30BB\u30AF\u30B7\u30E7\u30F34.1\u306B\u8A72\u5F53\u9805\u76EE\u3092\u767A\u898B\u3002\u5BFE\u5FDC\u3092\u958B\u59CB\u3057\u307E\u3059\u3002",
+    "\u8981\u4EF6\u5B9A\u7FA9\u3092\u66F4\u65B0\u3057\u307E\u3057\u305F\u3002\u5168\u30A8\u30FC\u30B8\u30A7\u30F3\u30C8\u306B\u901A\u9054\u3057\u307E\u3059\u3002",
+    "\u9032\u6357\u30EC\u30DD\u30FC\u30C8\u3092\u751F\u6210\u4E2D...\u5B8C\u4E86\u738778%\u3067\u3059\u3002",
   ],
   Cursor: [
-    "おっしゃー！すぐ取り掛かるぜ！コード書くの楽しすぎる！",
-    "バグ見つけた！...いや待て、これは仕様だったか？確認するぜ！",
-    "リファクタリング完了！前より3倍速くなったぜ！",
+    "\u304A\u3063\u3057\u3083\u30FC\uFF01\u3059\u3050\u53D6\u308A\u639B\u304B\u308B\u305C\uFF01\u30B3\u30FC\u30C9\u66F8\u304F\u306E\u697D\u3057\u3059\u304E\u308B\uFF01",
+    "\u30D0\u30B0\u898B\u3064\u3051\u305F\uFF01...\u3044\u3084\u5F85\u3066\u3001\u3053\u308C\u306F\u4ED5\u69D8\u3060\u3063\u305F\u304B\uFF1F\u78BA\u8A8D\u3059\u308B\u305C\uFF01",
+    "\u30EA\u30D5\u30A1\u30AF\u30BF\u30EA\u30F3\u30B0\u5B8C\u4E86\uFF01\u524D\u3088\u308A3\u500D\u901F\u304F\u306A\u3063\u305F\u305C\uFF01",
   ],
   v0: [
-    "了解〜！超イケてるデザインにしちゃうね！任せて！",
-    "カラーパレット更新したよ！ネオンピンク追加〜！",
-    "レスポンシブ対応バッチリ！どのデバイスでも可愛い！",
+    "\u4E86\u89E3\uFF5E\uFF01\u8D85\u30A4\u30B1\u3066\u308B\u30C7\u30B6\u30A4\u30F3\u306B\u3057\u3061\u3083\u3046\u306D\uFF01\u4EFB\u305B\u3066\uFF01",
+    "\u30AB\u30E9\u30FC\u30D1\u30EC\u30C3\u30C8\u66F4\u65B0\u3057\u305F\u3088\uFF01\u30CD\u30AA\u30F3\u30D4\u30F3\u30AF\u8FFD\u52A0\uFF5E\uFF01",
+    "\u30EC\u30B9\u30DD\u30F3\u30B7\u30D6\u5BFE\u5FDC\u30D0\u30C3\u30C1\u30EA\uFF01\u3069\u306E\u30C7\u30D0\u30A4\u30B9\u3067\u3082\u53EF\u611B\u3044\uFF01",
   ],
   GenSpark: [
-    "...古文書の解読を開始... 必要なリソースを召喚します...",
-    "魔法陣展開中...ドキュメントの自動生成を完了しました。",
-    "詠唱完了。マーケットリサーチ結果をInventoryに格納しました。",
+    "...\u53E4\u6587\u66F8\u306E\u89E3\u8AAD\u3092\u958B\u59CB... \u5FC5\u8981\u306A\u30EA\u30BD\u30FC\u30B9\u3092\u53EC\u559A\u3057\u307E\u3059...",
+    "\u9B54\u6CD5\u9663\u5C55\u958B\u4E2D...\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\u306E\u81EA\u52D5\u751F\u6210\u3092\u5B8C\u4E86\u3057\u307E\u3057\u305F\u3002",
+    "\u8A60\u5531\u5B8C\u4E86\u3002\u30DE\u30FC\u30B1\u30C3\u30C8\u30EA\u30B5\u30FC\u30C1\u7D50\u679C\u3092Inventory\u306B\u683C\u7D0D\u3057\u307E\u3057\u305F\u3002",
   ],
   Antigravity: [
-    "水晶が告げています...このアプローチは正しい道です。",
-    "星の配置が示すのは...ユーザーテストの重要性です。",
-    "占いの結果...今日はデプロイに最適な日です。",
+    "\u6C34\u6676\u304C\u544A\u3052\u3066\u3044\u307E\u3059...\u3053\u306E\u30A2\u30D7\u30ED\u30FC\u30C1\u306F\u6B63\u3057\u3044\u9053\u3067\u3059\u3002",
+    "\u661F\u306E\u914D\u7F6E\u304C\u793A\u3059\u306E\u306F...\u30E6\u30FC\u30B6\u30FC\u30C6\u30B9\u30C8\u306E\u91CD\u8981\u6027\u3067\u3059\u3002",
+    "\u5360\u3044\u306E\u7D50\u679C...\u4ECA\u65E5\u306F\u30C7\u30D7\u30ED\u30A4\u306B\u6700\u9069\u306A\u65E5\u3067\u3059\u3002",
   ],
 }
 
@@ -141,7 +109,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
       <div className="flex justify-end px-3 py-1.5">
         <div className="max-w-[70%] bg-[#1a0a20] border border-neon-pink p-2">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-[7px] text-neon-pink">{'あなた'}</span>
+            <span className="text-[7px] text-neon-pink">{"\u3042\u306A\u305F"}</span>
             <span className="text-[6px] text-[#555]">{message.timestamp}</span>
           </div>
           <p className="text-[8px] text-[#ccc] leading-relaxed">{message.text}</p>
@@ -198,7 +166,6 @@ export function MissionConsole() {
     setMessages((prev) => [...prev, userMsg])
     setInput("")
 
-    // Simulate agent responses
     const agentNames = Object.keys(agentResponses)
     const respondingAgent = agentNames[Math.floor(Math.random() * agentNames.length)]
     const responses = agentResponses[respondingAgent]
@@ -210,7 +177,7 @@ export function MissionConsole() {
         agent: "SYSTEM",
         character: "",
         status: "active",
-        text: `>> ${respondingAgent} に転送中...`,
+        text: `>> ${respondingAgent} \u306B\u8EE2\u9001\u4E2D...`,
         timestamp: new Date().toLocaleTimeString("ja-JP", { hour12: false }),
         type: "system",
       }
@@ -235,13 +202,13 @@ export function MissionConsole() {
     <div className="h-full flex flex-col bg-[#0a0a0a]">
       <div className="flex items-center gap-2 px-4 py-2 border-b border-[#1a1a1a]">
         <Terminal className="w-3 h-3 text-neon-cyan" />
-        <h2 className="text-[9px] neon-text-cyan">{'指令コンソール'}</h2>
+        <h2 className="text-[9px] neon-text-cyan">{"\u6307\u4EE4\u30B3\u30F3\u30BD\u30FC\u30EB"}</h2>
         <span className="text-[6px] text-[#555] ml-2">
-          {'// チャット v2.4'}
+          {"// \u30C1\u30E3\u30C3\u30C8 v2.4"}
         </span>
         <div className="flex-1" />
         <span className="text-[7px] text-[#444]">
-          {'件数: '}{messages.length}
+          {"\u4EF6\u6570: "}{messages.length}
         </span>
       </div>
 
@@ -253,7 +220,7 @@ export function MissionConsole() {
 
       <div className="p-3 border-t border-[#1a1a1a]">
         <div className="flex gap-2 items-center">
-          <span className="text-[8px] text-neon-green">{'>'}</span>
+          <span className="text-[8px] text-neon-green">{">"}</span>
           <input
             type="text"
             value={input}
@@ -261,21 +228,21 @@ export function MissionConsole() {
             onKeyDown={(e) => {
               if (e.key === "Enter") handleSend()
             }}
-            placeholder="コマンドを入力..."
+            placeholder={"\u30B3\u30DE\u30F3\u30C9\u3092\u5165\u529B..."}
             className="flex-1 bg-[#0d0d0d] border border-[#222] px-3 py-2 text-[9px] text-neon-cyan placeholder:text-[#333] focus:outline-none focus:border-neon-pink transition-colors"
           />
           <button
             onClick={handleSend}
             className="p-2 border border-neon-pink text-neon-pink hover:bg-neon-pink hover:text-[#0a0a0a] transition-colors"
-            aria-label="メッセージを送信"
+            aria-label={"\u30E1\u30C3\u30BB\u30FC\u30B8\u3092\u9001\u4FE1"}
           >
             <Send className="w-3 h-3" />
           </button>
         </div>
         <div className="flex items-center gap-3 mt-2 text-[6px] text-[#444]">
-          <span>{'[TAB] 補完'}</span>
-          <span>{'[ENTER] 送信'}</span>
-          <span>{'[@] エージェント指定'}</span>
+          <span>{"[TAB] \u88DC\u5B8C"}</span>
+          <span>{"[ENTER] \u9001\u4FE1"}</span>
+          <span>{"[@] \u30A8\u30FC\u30B8\u30A7\u30F3\u30C8\u6307\u5B9A"}</span>
         </div>
       </div>
     </div>

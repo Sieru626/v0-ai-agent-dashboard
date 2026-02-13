@@ -12,9 +12,12 @@ import { ArtifactViewerHologram } from "@/components/dashboard/artifact-viewer-h
 import { ArtifactViewerSlide } from "@/components/dashboard/artifact-viewer-slide"
 import { inventoryItems } from "@/components/dashboard/artifact-data"
 
+const DEFAULT_IN_ROOM = ["notebooklm", "v0", "genspark"]
+
 export default function ConferenceRoom() {
   const [viewMode, setViewMode] = useState<ViewMode>("windows")
   const [openArtifactIds, setOpenArtifactIds] = useState<number[]>([])
+  const [inRoomIds, setInRoomIds] = useState<string[]>(DEFAULT_IN_ROOM)
 
   const handleToggleArtifact = useCallback((id: number) => {
     setOpenArtifactIds((prev) =>
@@ -30,6 +33,12 @@ export default function ConferenceRoom() {
     setOpenArtifactIds([])
   }, [])
 
+  const handleToggleAgent = useCallback((id: string) => {
+    setInRoomIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    )
+  }, [])
+
   return (
     <div className="flex flex-col h-screen bg-[#0a0a0a] overflow-hidden">
       <div
@@ -38,7 +47,7 @@ export default function ConferenceRoom() {
       />
 
       <RoomHeader roomName={"\u4F1A\u8B70\u5BA4"} roomNameEn="CONFERENCE ROOM" borderClass="neon-border-pink" textClass="text-neon-pink" />
-      <AgentBar />
+      <AgentBar inRoomIds={inRoomIds} onToggleAgent={handleToggleAgent} showRoomControls />
 
       <div className="flex items-center justify-between px-4 py-1 border-b border-[#1a1a1a] bg-[#080808]">
         <ModeSwitcher current={viewMode} onChange={setViewMode} />

@@ -28,7 +28,7 @@ export function RoomHeader({ roomName, roomNameEn, borderClass = "neon-border-pi
       </div>
       <div className="flex items-center gap-3 text-[7px]">
         <span className="text-neon-green">{"ONLINE"}</span>
-        <span className="text-[#555]">{"\u306A\u308A\u305F\u305F\u305B\u5C4B\u672C\u8217"}</span>
+        <span className="text-[#555]">{"\u6210\u7ACB\u305F\u305B\u672C\u8217"}</span>
       </div>
     </header>
   )

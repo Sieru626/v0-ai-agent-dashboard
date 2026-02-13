@@ -23,7 +23,7 @@ export function StatusBar() {
           <span>{"\u9023\u7D9A\u7A3C\u50CD: 7\u65E5"}</span>
         </div>
         <span className="text-[#444]">
-          {"\u306A\u308A\u305F\u305F\u305B\u5C4B\u672C\u8217 v2.4.0 // AI\u59C9\u59B9\u304C\u52D5\u304B\u3057\u3066\u3044\u307E\u3059"}
+          {"\u6210\u7ACB\u305F\u305B\u672C\u8217 v2.4.0 // AI\u59C9\u59B9\u304C\u52D5\u304B\u3057\u3066\u3044\u307E\u3059"}
         </span>
       </div>
     </footer>

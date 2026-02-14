@@ -66,11 +66,11 @@ export default function ArchivesRoom() {
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
             <PixelAvatar character="genspark" status="active" size={20} />
-            <span className="text-[7px] text-neon-green">{"GenSpark: \u9B54\u5C0E\u66F8\u7BA1\u7406\u4E2D..."}</span>
+            <span className="text-[7px] font-dot-jp text-neon-green">{"GenSpark: \u9B54\u5C0E\u66F8\u7BA1\u7406\u4E2D..."}</span>
           </div>
           <div className="flex items-center gap-2">
             <PixelAvatar character="antigravity" status="idle" size={20} />
-            <span className="text-[7px] text-neon-cyan">{"Antigravity: \u76E3\u8996\u4E2D..."}</span>
+            <span className="text-[7px] font-dot-jp text-neon-cyan">{"Antigravity: \u76E3\u8996\u4E2D..."}</span>
           </div>
         </div>
 
@@ -82,7 +82,7 @@ export default function ArchivesRoom() {
       {/* Filter bar */}
       <div className="flex items-center gap-2 px-4 py-1.5 border-b border-[#1a1a1a] bg-[#080808]">
         <Filter className="w-2.5 h-2.5 text-[#555]" />
-        <span className="text-[7px] text-[#555]">{"\u7D5E\u8FBC:"}</span>
+        <span className="text-[7px] font-dot-jp text-[#555]">{"\u7D5E\u8FBC:"}</span>
         {["all", "code", "design", "map", "doc"].map((f) => (
           <button
             key={f}
@@ -93,7 +93,7 @@ export default function ArchivesRoom() {
                 : "border-[#333] text-[#666] hover:border-[#555]"
             }`}
           >
-            {f === "all" ? "\u5168\u3066" : f === "code" ? "\u30B3\u30FC\u30C9" : f === "design" ? "\u30C7\u30B6\u30A4\u30F3" : f === "map" ? "\u5730\u56F3" : "\u6587\u66F8"}
+            <span className="font-dot-jp">{f === "all" ? "\u5168\u3066" : f === "code" ? "\u30B3\u30FC\u30C9" : f === "design" ? "\u30C7\u30B6\u30A4\u30F3" : f === "map" ? "\u5730\u56F3" : "\u6587\u66F8"}</span>
           </button>
         ))}
         <div className="flex-1" />
@@ -126,13 +126,13 @@ export default function ArchivesRoom() {
                   <span className={`text-[7px] ${rarity.text} font-bold`}>{rarity.label}</span>
                 </div>
                 <div className="flex items-center justify-between mt-auto">
-                  <span className="text-[6px] text-[#555]">{"\u62C5\u5F53: "}{item.agent}</span>
+                  <span className="text-[6px] font-dot-jp text-[#555]">{"\u62C5\u5F53: "}{item.agent}</span>
                   <span className="text-[6px] text-[#444]">{item.timestamp}</span>
                 </div>
                 {isOpen && (
                   <div className="flex items-center gap-1 mt-2">
                     <Sparkles className="w-2 h-2 text-neon-cyan" />
-                    <span className="text-[6px] text-neon-cyan">{"\u5C55\u958B\u4E2D"}</span>
+                    <span className="text-[6px] font-dot-jp text-neon-cyan">{"\u5C55\u958B\u4E2D"}</span>
                   </div>
                 )}
               </button>
@@ -156,11 +156,11 @@ export default function ArchivesRoom() {
       <div className="flex items-center justify-between px-4 py-1.5 border-t border-[#1a1a1a] bg-[#060606] text-[7px]">
         <div className="flex items-center gap-2">
           <Package className="w-2.5 h-2.5 text-neon-green" />
-          <span className="text-neon-green">{"\u7DCF\u8CC7\u6599\u6570: "}{inventoryItems.length}</span>
+          <span className="text-neon-green font-dot-jp">{"\u7DCF\u8CC7\u6599\u6570: "}{inventoryItems.length}</span>
         </div>
         <div className="flex items-center gap-1">
           <Star className="w-2.5 h-2.5 text-neon-green" />
-          <span className="text-neon-green">{"\u30B9\u30B3\u30A2: 1,240"}</span>
+          <span className="text-neon-green font-dot-jp">{"\u30B9\u30B3\u30A2: 1,240"}</span>
         </div>
       </div>
 

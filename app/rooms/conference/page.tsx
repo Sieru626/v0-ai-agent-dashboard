@@ -51,7 +51,7 @@ export default function ConferenceRoom() {
 
       <div className="flex items-center justify-between px-4 py-1 border-b border-[#1a1a1a] bg-[#080808]">
         <ModeSwitcher current={viewMode} onChange={setViewMode} />
-        <span className="text-[6px] text-[#444]">
+        <span className="text-[6px] font-dot-jp text-[#444]">
           {"// GenSpark\u306E\u9B54\u6CD5\u3067\u8CC7\u6599\u3092\u53EC\u559A"}
         </span>
       </div>

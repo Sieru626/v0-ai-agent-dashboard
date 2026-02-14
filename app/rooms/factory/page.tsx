@@ -42,31 +42,31 @@ export default function FactoryRoom() {
           <div className="flex items-center gap-1">
             <button onClick={() => setActiveTab("code")} className={`flex items-center gap-1 px-3 py-1 border text-[8px] transition-colors ${activeTab === "code" ? "border-neon-cyan text-neon-cyan bg-[#0a1520]" : "border-[#333] text-[#666] hover:border-neon-cyan"}`}>
               <Code className="w-2.5 h-2.5" />
-              <span>{"\u30B3\u30FC\u30C9"}</span>
+              <span className="font-dot-jp">{"\u30B3\u30FC\u30C9"}</span>
             </button>
             <button onClick={() => setActiveTab("preview")} className={`flex items-center gap-1 px-3 py-1 border text-[8px] transition-colors ${activeTab === "preview" ? "border-neon-pink text-neon-pink bg-[#1a0a15]" : "border-[#333] text-[#666] hover:border-neon-pink"}`}>
               <Eye className="w-2.5 h-2.5" />
-              <span>{"\u30D7\u30EC\u30D3\u30E5\u30FC"}</span>
+              <span className="font-dot-jp">{"\u30D7\u30EC\u30D3\u30E5\u30FC"}</span>
             </button>
           </div>
           <div className="w-px h-5 bg-[#222]" />
           <div className="flex items-center gap-2">
             <PixelAvatar character="cursor" status="active" size={20} />
-            <span className="text-[7px] text-neon-green">{"Cursor: \u5B9F\u88C5\u4E2D..."}</span>
+            <span className="text-[7px] font-dot-jp text-neon-green">{"Cursor: \u5B9F\u88C5\u4E2D..."}</span>
           </div>
           <div className="flex items-center gap-2">
             <PixelAvatar character="v0" status="active" size={20} />
-            <span className="text-[7px] text-neon-pink">{"v0: \u30B9\u30BF\u30A4\u30EA\u30F3\u30B0\u4E2D..."}</span>
+            <span className="text-[7px] font-dot-jp text-neon-pink">{"v0: \u30B9\u30BF\u30A4\u30EA\u30F3\u30B0\u4E2D..."}</span>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <button onClick={handleBuild} disabled={buildStatus === "building"} className={`flex items-center gap-1 px-3 py-1 border text-[8px] transition-colors ${buildStatus === "success" ? "border-neon-green text-neon-green" : buildStatus === "building" ? "border-neon-cyan text-neon-cyan animate-pulse" : "border-neon-green text-neon-green hover:bg-neon-green hover:text-[#0a0a0a]"}`}>
             {buildStatus === "building" ? (
-              <><RotateCcw className="w-2.5 h-2.5 animate-spin" /><span>{"\u30D3\u30EB\u30C9\u4E2D..."}</span></>
+              <><RotateCcw className="w-2.5 h-2.5 animate-spin" /><span className="font-dot-jp">{"\u30D3\u30EB\u30C9\u4E2D..."}</span></>
             ) : buildStatus === "success" ? (
-              <><Check className="w-2.5 h-2.5" /><span>{"\u6210\u529F"}</span></>
+              <><Check className="w-2.5 h-2.5" /><span className="font-dot-jp">{"\u6210\u529F"}</span></>
             ) : (
-              <><Play className="w-2.5 h-2.5" /><span>{"\u30D3\u30EB\u30C9"}</span></>
+              <><Play className="w-2.5 h-2.5" /><span className="font-dot-jp">{"\u30D3\u30EB\u30C9"}</span></>
             )}
           </button>
         </div>
@@ -104,7 +104,7 @@ export default function FactoryRoom() {
               </div>
               <div className="flex-1 flex items-center justify-center bg-[#080808]">
                 <div className="flex flex-col items-center gap-3">
-                  <div className="text-[10px] neon-text-pink">{"\u306A\u308A\u305F\u305F\u305B\u5C4B\u672C\u8217"}</div>
+                  <div className="text-[10px] font-dot-jp neon-text-pink">{"\u6210\u7ACB\u305F\u305B\u5C4B\u672C\u8217"}</div>
                   <div className="flex gap-2">
                     <div className="w-20 h-12 border border-neon-cyan bg-[#0a1520]" />
                     <div className="w-20 h-12 border border-neon-pink bg-[#1a0a15]" />
@@ -119,13 +119,13 @@ export default function FactoryRoom() {
 
         <div className="w-56 border-l border-[#1a1a1a] bg-[#060606] flex flex-col">
           <div className="p-3 border-b border-[#1a1a1a]">
-            <span className="text-[8px] neon-text-green">{"\u30D3\u30EB\u30C9\u30ED\u30B0"}</span>
+            <span className="text-[8px] font-dot-jp neon-text-green">{"\u30D3\u30EB\u30C9\u30ED\u30B0"}</span>
           </div>
           <div className="flex-1 overflow-y-auto p-3 space-y-1 text-[7px] font-mono">
             <p className="text-[#666]">{"> init..."}</p>
             <p className="text-[#666]">{"> compiling..."}</p>
-            <p className="text-neon-green">{"> Cursor: \u30C7\u30D7\u30ED\u30A4\u6E96\u5099\u5B8C\u4E86\u3060\u305C\uFF01"}</p>
-            <p className="text-neon-pink">{"> v0: CSS\u30D0\u30C3\u30C1\u30EA\uFF5E\uFF01"}</p>
+            <p className="text-neon-green font-dot-jp">{"> Cursor: \u30C7\u30D7\u30ED\u30A4\u6E96\u5099\u5B8C\u4E86\u3060\u305C\uFF01"}</p>
+            <p className="text-neon-pink font-dot-jp">{"> v0: CSS\u30D0\u30C3\u30C1\u30EA\uFF5E\uFF01"}</p>
             <p className="text-neon-cyan">{"> build complete"}</p>
           </div>
         </div>

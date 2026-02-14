@@ -38,7 +38,7 @@ export function GateScreen() {
     setTimeout(() => {
       if (password === PASSCODE) {
         setPhase("granted")
-        setDialogue("\u8A8D\u8A3C\u6210\u529F\u3002\u3088\u3046\u3053\u305D\u3001\u306A\u308A\u305F\u305F\u305B\u5C4B\u672C\u8217\u3078\u3002")
+        setDialogue("\u8A8D\u8A3C\u6210\u529F\u3002\u3088\u3046\u3053\u305D\u3001\u6210\u7ACB\u305F\u305B\u5C4B\u672C\u8217\u3078\u3002")
         setTimeout(() => { setPhase("transitioning"); setTimeout(() => router.push("/lobby"), 1200) }, 1800)
       } else {
         setPhase("idle")
@@ -64,7 +64,10 @@ export function GateScreen() {
       <div className={`flex flex-col items-center gap-6 transition-opacity duration-500 ${phase === "granted" || phase === "transitioning" ? "opacity-0" : "opacity-100"}`}>
         <div className="flex items-center gap-3 animate-fade-up">
           <Zap className="w-6 h-6 text-neon-pink animate-pulse-glow" />
-          <h1 className="text-lg neon-text-pink tracking-wider">{"\u306A\u308A\u305F\u305F\u305B\u5C4B\u672C\u8217"}</h1>
+          <div className="flex flex-col items-center gap-1">
+            <h1 className="text-xl neon-text-pink tracking-[0.2em] animate-flicker" style={{ textShadow: "0 0 10px #ff2d78, 0 0 30px #ff2d78, 0 0 60px #ff2d78, 0 0 80px #ff2d78" }}>{"\u6210\u7ACB\u305F\u305B\u5C4B\u672C\u8217"}</h1>
+            <span className="text-[7px] text-neon-cyan tracking-[0.5em] opacity-70">{"NARITATASE-YA"}</span>
+          </div>
           <Zap className="w-6 h-6 text-neon-pink animate-pulse-glow" />
         </div>
         <p className="text-[8px] text-neon-cyan opacity-50 tracking-[0.3em] animate-fade-up" style={{ animationDelay: "0.2s" }}>{"AI AGENT INTEGRATION SYSTEM"}</p>

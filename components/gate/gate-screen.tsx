@@ -65,7 +65,7 @@ export function GateScreen() {
         <div className="flex items-center gap-3 animate-fade-up">
           <Zap className="w-6 h-6 text-neon-pink animate-pulse-glow" />
           <div className="flex flex-col items-center gap-1">
-            <h1 className="text-xl neon-text-pink tracking-[0.2em] animate-flicker" style={{ textShadow: "0 0 10px #ff2d78, 0 0 30px #ff2d78, 0 0 60px #ff2d78, 0 0 80px #ff2d78" }}>{"\u6210\u7ACB\u305F\u305B\u5C4B\u672C\u8217"}</h1>
+            <h1 className="text-2xl font-dot-jp neon-text-pink tracking-[0.2em] animate-flicker" style={{ textShadow: "0 0 10px #ff2d78, 0 0 30px #ff2d78, 0 0 60px #ff2d78, 0 0 80px #ff2d78" }}>{"\u6210\u7ACB\u305F\u305B\u5C4B\u672C\u8217"}</h1>
             <span className="text-[7px] text-neon-cyan tracking-[0.5em] opacity-70">{"NARITATASE-YA"}</span>
           </div>
           <Zap className="w-6 h-6 text-neon-pink animate-pulse-glow" />
@@ -81,7 +81,7 @@ export function GateScreen() {
                 <span className="text-[8px] text-neon-pink">{"NotebookLM"}</span>
                 <span className="text-[6px] text-[#555]">{"// \u79D8\u66F8"}</span>
               </div>
-              <p className={`text-[9px] leading-relaxed ${error ? "text-neon-pink" : "text-[#ccc]"}`}>
+              <p className={`text-[9px] font-dot-jp leading-relaxed ${error ? "text-neon-pink" : "text-[#ccc]"}`}>
                 {dialogue}
                 {phase === "verifying" && <span className="animate-blink">{"_"}</span>}
               </p>

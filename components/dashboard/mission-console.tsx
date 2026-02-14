@@ -112,7 +112,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
             <span className="text-[7px] text-neon-pink">{"\u3042\u306A\u305F"}</span>
             <span className="text-[6px] text-[#555]">{message.timestamp}</span>
           </div>
-          <p className="text-[8px] text-[#ccc] leading-relaxed">{message.text}</p>
+          <p className="text-[8px] font-dot-jp text-[#ccc] leading-relaxed">{message.text}</p>
         </div>
       </div>
     )
@@ -130,7 +130,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         </div>
         <div className="bg-[#111] border border-[#222] p-2 relative">
           <div className="absolute -left-1 top-2 w-2 h-2 bg-[#111] border-l border-b border-[#222] rotate-45" />
-          <p className="text-[8px] text-[#ccc] leading-relaxed">{message.text}</p>
+          <p className="text-[8px] font-dot-jp text-[#ccc] leading-relaxed">{message.text}</p>
         </div>
       </div>
     </div>
@@ -202,8 +202,8 @@ export function MissionConsole() {
     <div className="h-full flex flex-col bg-[#0a0a0a]">
       <div className="flex items-center gap-2 px-4 py-2 border-b border-[#1a1a1a]">
         <Terminal className="w-3 h-3 text-neon-cyan" />
-        <h2 className="text-[9px] neon-text-cyan">{"\u6307\u4EE4\u30B3\u30F3\u30BD\u30FC\u30EB"}</h2>
-        <span className="text-[6px] text-[#555] ml-2">
+        <h2 className="text-[9px] font-dot-jp neon-text-cyan">{"\u6307\u4EE4\u30B3\u30F3\u30BD\u30FC\u30EB"}</h2>
+        <span className="text-[6px] font-dot-jp text-[#555] ml-2">
           {"// \u30C1\u30E3\u30C3\u30C8 v2.4"}
         </span>
         <div className="flex-1" />
@@ -239,7 +239,7 @@ export function MissionConsole() {
             <Send className="w-3 h-3" />
           </button>
         </div>
-        <div className="flex items-center gap-3 mt-2 text-[6px] text-[#444]">
+        <div className="flex items-center gap-3 mt-2 text-[6px] font-dot-jp text-[#444]">
           <span>{"[TAB] \u88DC\u5B8C"}</span>
           <span>{"[ENTER] \u9001\u4FE1"}</span>
           <span>{"[@] \u30A8\u30FC\u30B8\u30A7\u30F3\u30C8\u6307\u5B9A"}</span>

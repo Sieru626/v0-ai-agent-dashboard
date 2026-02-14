@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Press_Start_2P } from 'next/font/google'
+import { Press_Start_2P, DotGothic16 } from 'next/font/google'
 
 import './globals.css'
 
@@ -7,6 +7,12 @@ const pixelFont = Press_Start_2P({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-pixel',
+})
+
+const dotGothic = DotGothic16({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-dot-gothic',
 })
 
 export const metadata: Metadata = {
@@ -24,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ja" className={pixelFont.variable}>
+    <html lang="ja" className={`${pixelFont.variable} ${dotGothic.variable}`}>
       <body className="font-sans antialiased overflow-hidden">{children}</body>
     </html>
   )

@@ -13,6 +13,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-pixel)', 'monospace'],
         mono: ['var(--font-pixel)', 'monospace'],
+        'dot-jp': ['var(--font-dot-gothic)', 'var(--font-pixel)', 'monospace'],
       },
       colors: {
         'neon-pink': '#ff2d78',

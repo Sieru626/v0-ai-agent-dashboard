@@ -70,8 +70,8 @@ function RoomButton({ room, index }: { room: RoomConfig; index: number }) {
           <Icon className={`w-3.5 h-3.5 ${room.textClass}`} />
           <span className={`text-[10px] ${room.neonClass} tracking-wider`}>{room.nameEn}</span>
         </div>
-        <span className={`text-xs ${room.textClass}`}>{room.name}</span>
-        <span className="text-[7px] text-[#666]">{room.description}</span>
+        <span className={`text-xs font-dot-jp ${room.textClass}`}>{room.name}</span>
+        <span className="text-[7px] font-dot-jp text-[#666]">{room.description}</span>
       </div>
       <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 flex gap-2 transition-all duration-300" style={{ opacity: hovered ? 1 : 0, transform: `translateX(-50%) translateY(${hovered ? "0" : "16px"})` }}>
         {room.agents.map((agent) => (<div key={agent.character} className="animate-pop-in"><PixelAvatar character={agent.character} status="active" size={32} /></div>))}
@@ -91,12 +91,12 @@ export function LobbyScreen() {
         <div className="flex items-center gap-3">
           <Zap className="w-5 h-5 text-neon-pink animate-pulse-glow" />
           <div className="flex flex-col items-center gap-0.5">
-            <h1 className="text-base neon-text-pink tracking-[0.15em] animate-flicker" style={{ textShadow: "0 0 10px #ff2d78, 0 0 30px #ff2d78, 0 0 60px #ff2d78" }}>{"\u6210\u7ACB\u305F\u305B\u5C4B\u672C\u8217"}</h1>
+            <h1 className="text-lg font-dot-jp neon-text-pink tracking-[0.15em] animate-flicker" style={{ textShadow: "0 0 10px #ff2d78, 0 0 30px #ff2d78, 0 0 60px #ff2d78" }}>{"\u6210\u7ACB\u305F\u305B\u5C4B\u672C\u8217"}</h1>
             <span className="text-[6px] text-neon-cyan tracking-[0.4em] opacity-60">{"NARITATASE-YA"}</span>
           </div>
           <Zap className="w-5 h-5 text-neon-pink animate-pulse-glow" />
         </div>
-        <p className="text-[8px] text-neon-cyan opacity-50 tracking-[0.2em]">{"// CENTRAL HUB // \u90E8\u5C4B\u3092\u9078\u3093\u3067\u304F\u3060\u3055\u3044"}</p>
+        <p className="text-[8px] font-dot-jp text-neon-cyan opacity-50 tracking-[0.2em]">{"// CENTRAL HUB // \u90E8\u5C4B\u3092\u9078\u3093\u3067\u304F\u3060\u3055\u3044"}</p>
       </div>
 
       <div className="flex gap-8 items-start pb-16">

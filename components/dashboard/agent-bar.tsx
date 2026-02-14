@@ -67,7 +67,7 @@ export function AgentBar({ inRoomIds, onToggleAgent, showRoomControls = false }:
                           : "bg-neon-cyan opacity-50"
                   }`}
                 />
-                <span className={`text-[6px] ${isInRoom ? statusColor : "text-[#555]"}`}>
+                <span className={`text-[6px] font-dot-jp ${isInRoom ? statusColor : "text-[#555]"}`}>
                   {isInRoom ? agent.statusText : "\u4E0D\u5728"}
                 </span>
               </div>
@@ -83,9 +83,9 @@ export function AgentBar({ inRoomIds, onToggleAgent, showRoomControls = false }:
                 title={isInRoom ? "\u9000\u5BA4" : "\u5165\u5BA4"}
               >
                 {isInRoom ? (
-                  <><LogOut className="w-2.5 h-2.5" /><span>{"\u9000\u5BA4"}</span></>
+                  <><LogOut className="w-2.5 h-2.5" /><span className="font-dot-jp">{"\u9000\u5BA4"}</span></>
                 ) : (
-                  <><LogIn className="w-2.5 h-2.5" /><span>{"\u5165\u5BA4"}</span></>
+                  <><LogIn className="w-2.5 h-2.5" /><span className="font-dot-jp">{"\u5165\u5BA4"}</span></>
                 )}
               </button>
             )}
@@ -93,7 +93,7 @@ export function AgentBar({ inRoomIds, onToggleAgent, showRoomControls = false }:
         )
       })}
       <div className="flex-1" />
-      <span className="text-[7px] text-[#555] flex-shrink-0">
+      <span className="text-[7px] font-dot-jp text-[#555] flex-shrink-0">
         {showRoomControls ? `\u5728\u5BA4: ${activeCount}/${totalCount}` : `\u7A3C\u50CD\u4E2D: ${activeCount}/${totalCount}`}
       </span>
       <span className="text-[7px] text-neon-green flex-shrink-0">{"SYNC OK"}</span>

@@ -17,7 +17,7 @@ const dotGothic = DotGothic16({
 
 export const metadata: Metadata = {
   title: '\u6210\u7ACB\u305F\u305B\u5C4B\u672C\u8217 | AI Agent Dashboard',
-  description: 'Cyberpunk AI Agent Integration Dashboard - THE 5 SISTERS - NARITATASE-YA v2.5',
+  description: 'Cyberpunk AI Agent Integration Dashboard - THE 5 SISTERS - NARITATASE-YA v2.6',
 }
 
 export const viewport: Viewport = {

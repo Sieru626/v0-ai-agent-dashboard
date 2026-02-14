@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
-import { Zap, MessageSquare, Wrench, BookOpen } from "lucide-react"
+import { Zap, MessageSquare, Wrench, BookOpen, Coffee } from "lucide-react"
 import { PixelAvatar } from "@/components/dashboard/pixel-avatar"
 
 interface RoomConfig {
@@ -45,6 +45,14 @@ const rooms: RoomConfig[] = [
     borderClass: "neon-border-green", textClass: "text-neon-green", neonClass: "neon-text-green",
     glowColor: "rgba(57,255,20,0.2)",
     agents: [{ character: "genspark", name: "GenSpark" }, { character: "antigravity", name: "Antigravity" }],
+  },
+  {
+    id: "cafeteria", name: "\u30AB\u30D5\u30A7\u30C6\u30EA\u30A2", nameEn: "CAFETERIA",
+    description: "\u65E5\u5E38\u4F1A\u8A71\u3084\u96D1\u8AC7\u306E\u5834\u6240",
+    href: "/rooms/cafeteria", image: "/rooms/cafeteria.jpg", icon: Coffee,
+    borderClass: "border-amber-400", textClass: "text-amber-400", neonClass: "text-amber-400",
+    glowColor: "rgba(251,191,36,0.2)",
+    agents: [{ character: "v0", name: "v0" }, { character: "cursor", name: "Cursor" }, { character: "antigravity", name: "Antigravity" }],
   },
 ]
 
@@ -99,7 +107,7 @@ export function LobbyScreen() {
         <p className="text-[8px] font-dot-jp text-neon-cyan opacity-50 tracking-[0.2em]">{"// CENTRAL HUB // \u90E8\u5C4B\u3092\u9078\u3093\u3067\u304F\u3060\u3055\u3044"}</p>
       </div>
 
-      <div className="flex gap-8 items-start pb-16">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 items-start pb-16 px-8">
         {rooms.map((room, idx) => (<RoomButton key={room.id} room={room} index={idx} />))}
       </div>
 

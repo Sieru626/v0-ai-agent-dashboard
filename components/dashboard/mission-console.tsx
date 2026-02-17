@@ -14,7 +14,7 @@ interface ChatMessage {
   type: "agent" | "system" | "user"
 }
 
-const initialMessages: ChatMessage[] = [
+const defaultMessages: ChatMessage[] = [
   {
     id: 1, agent: "SYSTEM", character: "", status: "active",
     text: ">> \u6307\u4EE4\u30B3\u30F3\u30BD\u30FC\u30EB v2.4 \u8D77\u52D5\u5B8C\u4E86\u3002\u5168\u30A8\u30FC\u30B8\u30A7\u30F3\u30C8\u63A5\u7D9A\u6E08\u307F\u3002",
@@ -137,8 +137,14 @@ function MessageBubble({ message }: { message: ChatMessage }) {
   )
 }
 
-export function MissionConsole() {
-  const [messages, setMessages] = useState<ChatMessage[]>(initialMessages)
+interface MissionConsoleProps {
+  activeAgents?: string[]
+  title?: string
+  initialChatMessages?: ChatMessage[]
+}
+
+export function MissionConsole({ activeAgents, title, initialChatMessages }: MissionConsoleProps) {
+  const [messages, setMessages] = useState<ChatMessage[]>(initialChatMessages ?? defaultMessages)
   const [input, setInput] = useState("")
   const scrollRef = useRef<HTMLDivElement>(null)
 
@@ -166,8 +172,13 @@ export function MissionConsole() {
     setMessages((prev) => [...prev, userMsg])
     setInput("")
 
-    const agentNames = Object.keys(agentResponses)
-    const respondingAgent = agentNames[Math.floor(Math.random() * agentNames.length)]
+    const available = activeAgents
+      ? Object.keys(agentResponses).filter((a) => activeAgents.includes(a))
+      : Object.keys(agentResponses)
+
+    if (available.length === 0) return
+
+    const respondingAgent = available[Math.floor(Math.random() * available.length)]
     const responses = agentResponses[respondingAgent]
     const response = responses[Math.floor(Math.random() * responses.length)]
 
@@ -198,11 +209,13 @@ export function MissionConsole() {
     }, 1500)
   }
 
+  const displayTitle = title ?? "\u6307\u4EE4\u30B3\u30F3\u30BD\u30FC\u30EB"
+
   return (
     <div className="h-full flex flex-col bg-[#0a0a0a]">
       <div className="flex items-center gap-2 px-4 py-2 border-b border-[#1a1a1a]">
         <Terminal className="w-3 h-3 text-neon-cyan" />
-        <h2 className="text-[9px] font-dot-jp neon-text-cyan">{"\u6307\u4EE4\u30B3\u30F3\u30BD\u30FC\u30EB"}</h2>
+        <h2 className="text-[9px] font-dot-jp neon-text-cyan">{displayTitle}</h2>
         <span className="text-[6px] font-dot-jp text-[#555] ml-2">
           {"// \u30C1\u30E3\u30C3\u30C8 v2.4"}
         </span>

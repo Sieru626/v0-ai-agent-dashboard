@@ -1,37 +1,20 @@
 "use client"
 
 import { useState, useCallback } from "react"
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels"
 import { RoomHeader } from "@/components/rooms/room-header"
 import { AgentBar } from "@/components/dashboard/agent-bar"
 import { MissionConsole } from "@/components/dashboard/mission-console"
-import { InventoryBar } from "@/components/dashboard/inventory-bar"
 import { StatusBar } from "@/components/dashboard/status-bar"
-import { ModeSwitcher, type ViewMode } from "@/components/dashboard/mode-switcher"
-import { ArtifactViewerWindows } from "@/components/dashboard/artifact-viewer-windows"
-import { ArtifactViewerHologram } from "@/components/dashboard/artifact-viewer-hologram"
-import { ArtifactViewerSlide } from "@/components/dashboard/artifact-viewer-slide"
-import { inventoryItems } from "@/components/dashboard/artifact-data"
+import { SiteSelector, type SiteConfig } from "@/components/dashboard/site-selector"
+import { SitePreview } from "@/components/dashboard/site-preview"
 
 const DEFAULT_IN_ROOM = ["notebooklm", "v0", "genspark"]
 
 export default function ConferenceRoom() {
-  const [viewMode, setViewMode] = useState<ViewMode>("windows")
-  const [openArtifactIds, setOpenArtifactIds] = useState<number[]>([])
   const [inRoomIds, setInRoomIds] = useState<string[]>(DEFAULT_IN_ROOM)
-
-  const handleToggleArtifact = useCallback((id: number) => {
-    setOpenArtifactIds((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
-    )
-  }, [])
-
-  const handleCloseArtifact = useCallback((id: number) => {
-    setOpenArtifactIds((prev) => prev.filter((x) => x !== id))
-  }, [])
-
-  const handleCloseAllArtifacts = useCallback(() => {
-    setOpenArtifactIds([])
-  }, [])
+  const [selectedSite, setSelectedSite] = useState<SiteConfig | null>(null)
+  const [selectedFile, setSelectedFile] = useState<string | null>(null)
 
   const handleToggleAgent = useCallback((id: string) => {
     setInRoomIds((prev) =>
@@ -49,28 +32,35 @@ export default function ConferenceRoom() {
       <RoomHeader roomName={"\u4F1A\u8B70\u5BA4"} roomNameEn="CONFERENCE ROOM" borderClass="neon-border-pink" textClass="text-neon-pink" />
       <AgentBar inRoomIds={inRoomIds} onToggleAgent={handleToggleAgent} showRoomControls />
 
-      <div className="flex items-center justify-between px-4 py-1 border-b border-[#1a1a1a] bg-[#080808]">
-        <ModeSwitcher current={viewMode} onChange={setViewMode} />
-        <span className="text-[6px] font-dot-jp text-[#444]">
-          {"// GenSpark\u306E\u9B54\u6CD5\u3067\u8CC7\u6599\u3092\u53EC\u559A"}
-        </span>
+      <div className="flex-1 min-h-0">
+        <PanelGroup direction="horizontal" className="h-full">
+          <Panel defaultSize={20} minSize={15} maxSize={30}>
+            <SiteSelector
+              selectedFile={selectedFile}
+              onSelectFile={setSelectedFile}
+              onSelectSite={setSelectedSite}
+            />
+          </Panel>
+
+          <PanelResizeHandle className="w-1 bg-[#111] hover:bg-neon-cyan transition-colors cursor-col-resize" />
+
+          <Panel defaultSize={45} minSize={30}>
+            <MissionConsole
+              activeAgents={inRoomIds.map((id) => {
+                const map: Record<string, string> = { notebooklm: "NotebookLM", cursor: "Cursor", v0: "v0", genspark: "GenSpark", antigravity: "Antigravity" }
+                return map[id] ?? id
+              })}
+            />
+          </Panel>
+
+          <PanelResizeHandle className="w-1 bg-[#111] hover:bg-neon-pink transition-colors cursor-col-resize" />
+
+          <Panel defaultSize={35} minSize={20}>
+            <SitePreview site={selectedSite} selectedFile={selectedFile} />
+          </Panel>
+        </PanelGroup>
       </div>
 
-      <div className="flex-1 min-h-0 relative">
-        <MissionConsole />
-
-        {viewMode === "windows" && (
-          <ArtifactViewerWindows items={inventoryItems} openIds={openArtifactIds} onClose={handleCloseArtifact} />
-        )}
-        {viewMode === "hologram" && (
-          <ArtifactViewerHologram items={inventoryItems} openIds={openArtifactIds} onClose={handleCloseArtifact} />
-        )}
-        {viewMode === "slide" && (
-          <ArtifactViewerSlide items={inventoryItems} openIds={openArtifactIds} onClose={handleCloseArtifact} onClosePanel={handleCloseAllArtifacts} />
-        )}
-      </div>
-
-      <InventoryBar openIds={openArtifactIds} onToggle={handleToggleArtifact} />
       <StatusBar />
     </div>
   )

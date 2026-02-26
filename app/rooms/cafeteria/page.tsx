@@ -1,11 +1,12 @@
 "use client"
 
 import { useState, useRef, useEffect, useCallback } from "react"
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels"
 import { RoomHeader } from "@/components/rooms/room-header"
 import { AgentBar } from "@/components/dashboard/agent-bar"
 import { StatusBar } from "@/components/dashboard/status-bar"
 import { PixelAvatar } from "@/components/dashboard/pixel-avatar"
-import { Send, Coffee } from "lucide-react"
+import { Send, Coffee, MessageCircle, Lightbulb, Plus, X } from "lucide-react"
 
 interface CafeMessage {
   id: number
@@ -14,6 +15,19 @@ interface CafeMessage {
   text: string
   timestamp: string
   type: "agent" | "system" | "user"
+}
+
+interface ChatSession {
+  id: number
+  title: string
+  date: string
+  preview: string
+}
+
+interface IdeaNote {
+  id: number
+  text: string
+  color: string
 }
 
 const cafeResponses: Record<string, string[]> = {
@@ -48,19 +62,32 @@ const agentCharacters: Record<string, string> = {
   NotebookLM: "notebooklm", Cursor: "cursor", v0: "v0", GenSpark: "genspark", Antigravity: "antigravity",
 }
 
-const initialCafeMessages: CafeMessage[] = [
-  { id: 1, agent: "SYSTEM", character: "", text: ">> \u30AB\u30D5\u30A7\u30C6\u30EA\u30A2\u304C\u30AA\u30FC\u30D7\u30F3\u3057\u307E\u3057\u305F\u3002\u304A\u304F\u3064\u308D\u304E\u304F\u3060\u3055\u3044\u3002", timestamp: "12:00:00", type: "system" },
-  { id: 2, agent: "v0", character: "v0", text: "\u3084\u3063\u307B\u30FC\uFF01\u304A\u663C\u4F11\u307F\uFF5E\uFF01\u4ECA\u65E5\u306E\u30E9\u30F3\u30C1\u4F55\u306B\u3059\u308B\uFF1F", timestamp: "12:01:15", type: "agent" },
-  { id: 3, agent: "Cursor", character: "cursor", text: "\u8179\u6E1B\u3063\u305F\uFF5E\uFF01\u30D4\u30B6\u304C\u3044\u3044\u306A\uFF01\u30B3\u30FC\u30C9\u66F8\u304D\u306A\u304C\u3089\u98DF\u3079\u308B\u305C\uFF01", timestamp: "12:02:30", type: "agent" },
-  { id: 4, agent: "Antigravity", character: "antigravity", text: "\u4ECA\u65E5\u306E\u904B\u52E2\u3092\u5360\u3063\u3066\u3042\u3052\u308B\u306D...\u307F\u3093\u306A\u306E\u30E9\u30C3\u30AD\u30FC\u30A2\u30A4\u30C6\u30E0\u306F\u300C\u30B3\u30FC\u30D2\u30FC\u300D\u3060\u3063\u3066\u3002", timestamp: "12:03:45", type: "agent" },
+const initialMessages: CafeMessage[] = [
+  { id: 1, agent: "SYSTEM", character: "", text: ">> \u30AB\u30D5\u30A7\u30C6\u30EA\u30A2\u304C\u30AA\u30FC\u30D7\u30F3\u3057\u307E\u3057\u305F\u3002", timestamp: "12:00:00", type: "system" },
+  { id: 2, agent: "v0", character: "v0", text: "\u3084\u3063\u307B\u30FC\uFF01\u304A\u663C\u4F11\u307F\uFF5E\uFF01", timestamp: "12:01:15", type: "agent" },
+  { id: 3, agent: "Cursor", character: "cursor", text: "\u8179\u6E1B\u3063\u305F\uFF5E\uFF01", timestamp: "12:02:30", type: "agent" },
+]
+
+const mockSessions: ChatSession[] = [
+  { id: 1, title: "\u30E9\u30F3\u30C1\u306E\u8A71", date: "2026/02/26", preview: "\u4ECA\u65E5\u306E\u30E9\u30F3\u30C1\u4F55\u306B\u3059\u308B\uFF1F" },
+  { id: 2, title: "\u30D7\u30ED\u30B8\u30A7\u30AF\u30C8\u96D1\u8AC7", date: "2026/02/25", preview: "\u6700\u8FD1\u306E\u30D0\u30B0\u306E\u8A71..." },
+  { id: 3, title: "\u5360\u3044\u7D50\u679C", date: "2026/02/24", preview: "\u4ECA\u9031\u306E\u904B\u52E2\u306F..." },
 ]
 
 const DEFAULT_IN_ROOM = ["v0", "cursor", "antigravity"]
 
+const noteColors = ["border-neon-pink", "border-neon-cyan", "border-neon-green", "border-amber-400"]
+
 export default function CafeteriaRoom() {
-  const [messages, setMessages] = useState<CafeMessage[]>(initialCafeMessages)
+  const [messages, setMessages] = useState<CafeMessage[]>(initialMessages)
   const [input, setInput] = useState("")
   const [inRoomIds, setInRoomIds] = useState<string[]>(DEFAULT_IN_ROOM)
+  const [selectedSession, setSelectedSession] = useState<number | null>(null)
+  const [ideas, setIdeas] = useState<IdeaNote[]>([
+    { id: 1, text: "\u65B0\u6A5F\u80FD\u306E\u30A2\u30A4\u30C7\u30A2", color: "border-neon-pink" },
+    { id: 2, text: "\u6765\u9031\u306E\u4E88\u5B9A\u78BA\u8A8D", color: "border-neon-cyan" },
+  ])
+  const [newIdea, setNewIdea] = useState("")
   const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -77,8 +104,7 @@ export default function CafeteriaRoom() {
 
   const handleSend = () => {
     if (!input.trim()) return
-    const now = new Date()
-    const timestamp = now.toLocaleTimeString("ja-JP", { hour12: false })
+    const timestamp = new Date().toLocaleTimeString("ja-JP", { hour12: false })
 
     const userMsg: CafeMessage = {
       id: Date.now(), agent: "YOU", character: "", text: input, timestamp, type: "user",
@@ -101,7 +127,18 @@ export default function CafeteriaRoom() {
         text: response, timestamp: new Date().toLocaleTimeString("ja-JP", { hour12: false }), type: "agent",
       }
       setMessages((prev) => [...prev, agentMsg])
-    }, 1000)
+    }, 800)
+  }
+
+  const handleAddIdea = () => {
+    if (!newIdea.trim()) return
+    const color = noteColors[ideas.length % noteColors.length]
+    setIdeas((prev) => [...prev, { id: Date.now(), text: newIdea, color }])
+    setNewIdea("")
+  }
+
+  const handleRemoveIdea = (id: number) => {
+    setIdeas((prev) => prev.filter((i) => i.id !== id))
   }
 
   return (
@@ -111,77 +148,147 @@ export default function CafeteriaRoom() {
       <RoomHeader roomName={"\u30AB\u30D5\u30A7\u30C6\u30EA\u30A2"} roomNameEn="CAFETERIA" borderClass="border-amber-400" textClass="text-amber-400" />
       <AgentBar inRoomIds={inRoomIds} onToggleAgent={handleToggleAgent} showRoomControls />
 
-      <div className="flex-1 min-h-0 flex flex-col">
-        <div className="flex items-center gap-2 px-4 py-2 border-b border-[#1a1a1a]">
-          <Coffee className="w-3 h-3 text-amber-400" />
-          <h2 className="text-[9px] font-dot-jp text-amber-400">{"\u30AB\u30D5\u30A7\u30C8\u30FC\u30AF"}</h2>
-          <span className="text-[6px] font-dot-jp text-[#555] ml-2">{"// \u4F5C\u696D\u4EE5\u5916\u306E\u96D1\u8AC7\u30FB\u76F8\u8AC7"}</span>
-          <div className="flex-1" />
-          <span className="text-[7px] text-[#444] font-dot-jp">{"\u4EF6\u6570: "}{messages.length}</span>
-        </div>
+      <div className="flex-1 min-h-0">
+        <PanelGroup direction="horizontal" className="h-full">
+          {/* Left: Chat History */}
+          <Panel defaultSize={20} minSize={15} maxSize={30}>
+            <div className="h-full flex flex-col border-r border-[#1a1a1a] bg-[#080808]">
+              <div className="flex items-center gap-2 px-3 py-2 border-b border-[#1a1a1a]">
+                <MessageCircle className="w-3 h-3 text-amber-400" />
+                <span className="text-[8px] font-dot-jp text-amber-400">{"\u5C65\u6B74"}</span>
+              </div>
+              <div className="flex-1 overflow-y-auto">
+                {mockSessions.map((session) => (
+                  <button
+                    key={session.id}
+                    onClick={() => setSelectedSession(session.id)}
+                    className={`w-full text-left px-3 py-2 border-b border-[#111] hover:bg-[#0d0d0d] transition-colors ${selectedSession === session.id ? "bg-[#1a150a] border-l-2 border-l-amber-400" : ""}`}
+                  >
+                    <div className="text-[8px] text-amber-400 font-dot-jp truncate">{session.title}</div>
+                    <div className="text-[6px] text-[#555]">{session.date}</div>
+                    <div className="text-[6px] text-[#444] truncate mt-0.5">{session.preview}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </Panel>
 
-        <div ref={scrollRef} className="flex-1 overflow-y-auto py-2">
-          {messages.map((msg) => {
-            if (msg.type === "system") {
-              return (
-                <div key={msg.id} className="px-3 py-1.5">
-                  <span className="text-[8px] text-amber-400 opacity-70 font-mono">{msg.text}</span>
-                </div>
-              )
-            }
-            if (msg.type === "user") {
-              return (
-                <div key={msg.id} className="flex justify-end px-3 py-1.5">
-                  <div className="max-w-[70%] bg-[#1a150a] border border-amber-400 p-2">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-[7px] text-amber-400 font-dot-jp">{"\u3042\u306A\u305F"}</span>
-                      <span className="text-[6px] text-[#555]">{msg.timestamp}</span>
+          <PanelResizeHandle className="w-1 bg-[#111] hover:bg-amber-400 transition-colors cursor-col-resize" />
+
+          {/* Center: Chat */}
+          <Panel defaultSize={50} minSize={30}>
+            <div className="h-full flex flex-col">
+              <div className="flex items-center gap-2 px-4 py-2 border-b border-[#1a1a1a]">
+                <Coffee className="w-3 h-3 text-amber-400" />
+                <h2 className="text-[9px] font-dot-jp text-amber-400">{"\u30AB\u30D5\u30A7\u30C8\u30FC\u30AF"}</h2>
+                <span className="text-[6px] font-dot-jp text-[#555] ml-2">{"// \u96D1\u8AC7\u30FB\u76F8\u8AC7"}</span>
+                <div className="flex-1" />
+                <span className="text-[7px] text-[#444]">{messages.length}</span>
+              </div>
+
+              <div ref={scrollRef} className="flex-1 overflow-y-auto py-2">
+                {messages.map((msg) => {
+                  if (msg.type === "system") {
+                    return (
+                      <div key={msg.id} className="px-3 py-1.5">
+                        <span className="text-[8px] text-amber-400 opacity-70 font-mono">{msg.text}</span>
+                      </div>
+                    )
+                  }
+                  if (msg.type === "user") {
+                    return (
+                      <div key={msg.id} className="flex justify-end px-3 py-1.5">
+                        <div className="max-w-[70%] bg-[#1a150a] border border-amber-400 p-2">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-[7px] text-amber-400 font-dot-jp">{"\u3042\u306A\u305F"}</span>
+                            <span className="text-[6px] text-[#555]">{msg.timestamp}</span>
+                          </div>
+                          <p className="text-[8px] font-dot-jp text-[#ccc] leading-relaxed">{msg.text}</p>
+                        </div>
+                      </div>
+                    )
+                  }
+                  return (
+                    <div key={msg.id} className="flex gap-2 px-3 py-1.5 hover:bg-[#0d0d0d] transition-colors">
+                      <div className="flex-shrink-0 mt-0.5">
+                        <PixelAvatar character={msg.character} status="active" size={28} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <span className="text-[8px] text-amber-400">{msg.agent}</span>
+                          <span className="text-[6px] text-[#555]">{msg.timestamp}</span>
+                        </div>
+                        <div className="bg-[#111] border border-[#222] p-2 relative">
+                          <div className="absolute -left-1 top-2 w-2 h-2 bg-[#111] border-l border-b border-[#222] rotate-45" />
+                          <p className="text-[8px] font-dot-jp text-[#ccc] leading-relaxed">{msg.text}</p>
+                        </div>
+                      </div>
                     </div>
-                    <p className="text-[8px] font-dot-jp text-[#ccc] leading-relaxed">{msg.text}</p>
-                  </div>
-                </div>
-              )
-            }
-            return (
-              <div key={msg.id} className="flex gap-2 px-3 py-1.5 hover:bg-[#0d0d0d] transition-colors">
-                <div className="flex-shrink-0 mt-0.5">
-                  <PixelAvatar character={msg.character} status="active" size={28} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <span className="text-[8px] text-amber-400">{msg.agent}</span>
-                    <span className="text-[6px] text-[#555]">{msg.timestamp}</span>
-                  </div>
-                  <div className="bg-[#111] border border-[#222] p-2 relative">
-                    <div className="absolute -left-1 top-2 w-2 h-2 bg-[#111] border-l border-b border-[#222] rotate-45" />
-                    <p className="text-[8px] font-dot-jp text-[#ccc] leading-relaxed">{msg.text}</p>
-                  </div>
+                  )
+                })}
+              </div>
+
+              <div className="p-3 border-t border-[#1a1a1a]">
+                <div className="flex gap-2 items-center">
+                  <span className="text-[8px] text-amber-400">{">"}</span>
+                  <input
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === "Enter") handleSend() }}
+                    placeholder={"\u306A\u306B\u304B\u8A71\u3057\u304B\u3051\u3066\u307F\u308B..."}
+                    className="flex-1 bg-[#0d0d0d] border border-[#222] px-3 py-2 text-[9px] text-amber-400 placeholder:text-[#333] focus:outline-none focus:border-amber-400 transition-colors font-dot-jp"
+                  />
+                  <button onClick={handleSend} className="p-2 border border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-[#0a0a0a] transition-colors" aria-label="send">
+                    <Send className="w-3 h-3" />
+                  </button>
                 </div>
               </div>
-            )
-          })}
-        </div>
+            </div>
+          </Panel>
 
-        <div className="p-3 border-t border-[#1a1a1a]">
-          <div className="flex gap-2 items-center">
-            <span className="text-[8px] text-amber-400">{">"}</span>
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => { if (e.key === "Enter") handleSend() }}
-              placeholder={"\u306A\u306B\u304B\u8A71\u3057\u304B\u3051\u3066\u307F\u308B..."}
-              className="flex-1 bg-[#0d0d0d] border border-[#222] px-3 py-2 text-[9px] text-amber-400 placeholder:text-[#333] focus:outline-none focus:border-amber-400 transition-colors"
-            />
-            <button onClick={handleSend} className="p-2 border border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-[#0a0a0a] transition-colors" aria-label="send">
-              <Send className="w-3 h-3" />
-            </button>
-          </div>
-          <div className="flex items-center gap-3 mt-2 text-[6px] font-dot-jp text-[#444]">
-            <span>{"[ENTER] \u9001\u4FE1"}</span>
-            <span>{"\u5728\u5BA4\u4E2D\u306E\u30A8\u30FC\u30B8\u30A7\u30F3\u30C8\u304C\u8FD4\u7B54\u3057\u307E\u3059"}</span>
-          </div>
-        </div>
+          <PanelResizeHandle className="w-1 bg-[#111] hover:bg-amber-400 transition-colors cursor-col-resize" />
+
+          {/* Right: Idea Board */}
+          <Panel defaultSize={30} minSize={15}>
+            <div className="h-full flex flex-col border-l border-[#1a1a1a] bg-[#080808]">
+              <div className="flex items-center gap-2 px-3 py-2 border-b border-[#1a1a1a]">
+                <Lightbulb className="w-3 h-3 text-amber-400" />
+                <span className="text-[8px] font-dot-jp text-amber-400">{"\u30A2\u30A4\u30C7\u30A2\u30DC\u30FC\u30C9"}</span>
+              </div>
+
+              <div className="flex-1 overflow-y-auto p-3 space-y-2">
+                {ideas.map((idea) => (
+                  <div key={idea.id} className={`relative bg-[#0d0d0d] border ${idea.color} p-2 group`}>
+                    <button
+                      onClick={() => handleRemoveIdea(idea.id)}
+                      className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity text-[#555] hover:text-neon-pink"
+                    >
+                      <X className="w-2.5 h-2.5" />
+                    </button>
+                    <p className="text-[8px] font-dot-jp text-[#ccc] pr-4">{idea.text}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="p-3 border-t border-[#1a1a1a]">
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={newIdea}
+                    onChange={(e) => setNewIdea(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === "Enter") handleAddIdea() }}
+                    placeholder={"\u30E1\u30E2\u3092\u8FFD\u52A0..."}
+                    className="flex-1 bg-[#0d0d0d] border border-[#222] px-2 py-1.5 text-[8px] text-amber-400 placeholder:text-[#333] focus:outline-none focus:border-amber-400 transition-colors font-dot-jp"
+                  />
+                  <button onClick={handleAddIdea} className="p-1.5 border border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-[#0a0a0a] transition-colors">
+                    <Plus className="w-3 h-3" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Panel>
+        </PanelGroup>
       </div>
 
       <StatusBar />
